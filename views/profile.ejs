@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>messenger</title>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <script src="/socket.io/socket.io.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+      integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="whatapp_Box">
+        <div class="_header">
+          <div class="top_header_content">
+            <h5>messenger</h5>
+            <input type="hidden" id="socket"></input>
+            <input type="hidden" id="username" value="<%= userid %>"> </input>
+            <div class="right_top_icons">
+              <i class="fa fa-camera"></i>
+              <i class="fa fa-search"></i>
+              <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="bottom_header_content">
+            <button id="chats" class="active">Chats</button>
+            <button id="status">Peoples</button>
+            <button id="calls">Calls</button>
+          </div>
+        </div>
+
+        <div class="screen">
+          <div class="contact_list" id="cl">
+            <ul class="userContactList" id="usercon">
+                  <% const loginussers=users %>
+                  <% loginussers.forEach((e,index)=>{%>
+                    <li>
+                      <input type="hidden" id ="<%= e.userid %>" value ="<%= e.status %>"  >
+                      
+                      <div class="profile_section">
+                        <img src="icons/img2.png" alt="" />
+                      </div>
+                      <div class="contact_section">
+                        <h5 ><%= e.userid %></h5>
+                      </div>
+                      <div class="msg_counter">
+                        <small class="time">11:00 am</small>
+                        <small class="count">44</small>
+                      </div>
+                    </li>
+                   
+                  <% }) %>
+            </ul>
+
+            <button class="chatBtns">
+              <i class="fa fa-commenting" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <!-- status area is the start -->
+          <div class=" contact_list status_area">
+            <ul class="userContactList1">
+              <% loginussers.forEach((e)=>{%>
+                <li>
+                  
+                  <div class="profile_section">
+                    <img src="icons/img2.png" alt="" />
+                  </div>
+                  <div class="contact_section">
+                    <h5><%= e.userid%></h5>
+                  </div>
+                  <div class="msg_counter">
+                    <button>add friend</button>
+                  </div>
+                </li>
+               
+              <% }) %>
+        </ul>
+          </div>
+          <!-- status area is the end -->
+
+          <!-- calls area is the start -->
+          <div class="call_area">
+            <ul>
+              <li>
+                <div class="icon_call">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </div>
+
+                <div class="call_link">
+                  <h5>Create call link</h5>
+                  <small>Share a link for your Whatsapp call</small>
+                </div>
+              </li>
+
+              <p class="statusTxt">Recent</p>
+              <li>
+                <div class="call_img">
+                  <img src="icons/img3.png" alt="" />
+                </div>
+
+                <div class="call_link">
+                  <h5>Avinash Yadav</h5>
+                  <small
+                    ><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                    10 March, 6:09 pm</small
+                  >
+                </div>
+
+                <i
+                  class="fa fa-video-camera calling_icon"
+                  aria-hidden="true"
+                ></i>
+              </li>
+              <li>
+                <div class="call_img">
+                  <img src="icons/img6.png" alt="" />
+                </div>
+
+                <div class="call_link">
+                  <h5>Aman Sharma</h5>
+                  <small
+                    ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> 10
+                    March, 6:09 pm</small
+                  >
+                </div>
+
+                <i class="fa fa-phone calling_icon" aria-hidden="true"></i>
+              </li>
+              <li>
+                <div class="call_img">
+                  <img src="icons/img4.png" alt="" />
+                </div>
+
+                <div class="call_link">
+                  <h5>Arun Sharma</h5>
+                  <small
+                    ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> 10
+                    March, 6:09 pm</small
+                  >
+                </div>
+
+                <i class="fa fa-phone calling_icon" aria-hidden="true"></i>
+              </li>
+              <li>
+                <div class="call_img">
+                  <img src="icons/img2.png" alt="" />
+                </div>
+
+                <div class="call_link">
+                  <h5>Ankit</h5>
+                  <small
+                    ><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                    10 March, 6:09 pm</small
+                  >
+                </div>
+
+                <i
+                  class="fa fa-video-camera calling_icon"
+                  aria-hidden="true"
+                ></i>
+              </li>
+              <li>
+                <div class="call_img">
+                  <img src="icons/img7.png" alt="" />
+                </div>
+
+                <div class="call_link">
+                  <h5>Parmit</h5>
+                  <small
+                    ><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+                    10 March, 6:09 pm</small
+                  >
+                </div>
+
+                <i
+                  class="fa fa-video-camera calling_icon"
+                  aria-hidden="true"
+                ></i>
+              </li>
+            </ul>
+
+            <button class="callBtns">
+              <i class="fa fa-phone"></i>
+            </button>
+          </div>
+          <!-- calls area is the end -->
+
+          <!-- community -->
+          <div class="community_area">
+            <ul>
+              <li>
+                <div class="community_icon">
+                  <i class="fa fa-users" aria-hidden="true"></i>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </div>
+                <div class="text_community">
+                  <h5>New community</h5>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="contact_chat_area" style="z-index: 1;">
+          <div class="header_contact">
+            <div class="profile_contact">
+              <i class="fa fa-arrow-left"></i>
+              <img src="/icons/img8.png" alt="">
+            </div>
+            <div class="contact_name">
+              <h5></h5>
+              <small></small>
+            </div>
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            
+          </div>
+          <div class="chat_screen" style="z-index: 0;">
+            <div class="chat_" id="chat">
+              <!-- <p class="left_chat">this is the left chat</p>
+              <p class="right_chat">this is the right chat</p> -->
+            </div>
+          </div>
+
+          <div class="input_">
+            <i class="fa fa-smile-o" aria-hidden="true"></i>
+            <input type="text" id="msg-input" placeholder="Message">
+            <div class="more_icons">
+              <i class="fa fa-paperclip" aria-hidden="true"></i>
+              <i class="fa fa-inr" aria-hidden="true"></i>
+              <i class="fa fa-camera" aria-hidden="true"></i>
+            </div>
+            <button class="mic" id="send"><i class="fa fa-send"></i></button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <script src="javascripts/script.js"></script>
+  </body>
+</html>
