@@ -97,7 +97,7 @@ Socket.on('typestat1',(e)=>{
       .replace(/,/g, "");
     console.log(formateddate);
     dbconnect.query(
-      `update login_users set status='${formateddate}' where socketid ='${Socket.id}'`
+      `update login_users set status='Last seen at ${formateddate}' where socketid ='${Socket.id}'`
     );
     dbconnect.query(
       `select userid from login_users where socketid ='${Socket.id}'`,
