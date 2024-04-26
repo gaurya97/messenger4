@@ -3,19 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/login.css">
     <title>Document</title>
 </head>
 <body> 
     
     
     <form action="/login" method="post">
-    <label for="userid" >USERID</label>
-    <input type="text" name="userid" id="userid">
-    <label for="password">PASSWORD</label>
-    <input type="text" name="password" id="password">
-    <button type="submit">login</button>
+     <div class="login-box" id="login" >
+    <div><b style="color: #25d366; font-size: 25px;">Messenger</b></div>
 
+    <input type="text" name="userid" placeholder="Enter Username">
+    <input type="text" name="password"  placeholder="Enter Password">
+    <p></p>
+    <button type="submit"><b>Log in</b></button>
 </form>
-           
+    <p></p>
+    <div class="line" ><hr><p>Or</p><hr></div>
+    <button type="button" class="na" id="new-acc"><b>Create New Account</b></button> 
+     </div>
+     
+
+<form action="/register" method="post">
+    <div class="login-box reg" id="register">
+       <div><b style="color: #25d366; font-size: 25px;">Messenger</b></div>
+
+   <input type="text" name="username"  placeholder="Enter Username">
+   <input type="text" name="userid"  placeholder="Enter User Id">
+   <input type="text" name="mobile"  placeholder="Enter Mobile">
+   <input type="text" name="password"  placeholder="Enter Password">
+   <p></p>
+   <button type="submit"><b>Create Account</b></button>
+</form>
+   <div class="line" ><hr><p>Or</p><hr></div>
+    <button type="button" class="na" id="n-log"><b>Log in</b></button> 
+    </div>
+    
+
 </body>
+<script src="/javascripts/login.js"></script>
 </html>

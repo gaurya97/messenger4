@@ -65,6 +65,20 @@ Socket.on('typestat1',(e)=>{
 
   Socket.on("sendMessege", (e) => {
     console.log(e.senderid,e.sendersocketid, e.recceiverid, e.msg);
+    dbconnect.query(`update messeges 
+    set msg_stat1 =null
+    where sender in('${e.senderid}','${e.recceiverid}') and recever in('${e.senderid}','${e.recceiverid}') order by id desc limit 1`,(err,result)=>{
+      if(err){
+        console.log(err)
+      }
+      else{
+        dbconnect.query(`insert into messeges (sender,msg,recever,msg_stat1,time) values('${e.senderid}','${e.msg}','${e.recceiverid}','last','${e.time}')`)
+
+      }
+
+
+    })
+    
     dbconnect.query(`select socketid from login_users where userid ='${e.recceiverid}'`,(err,result)=>{
         if(err){
             console.log(err)
@@ -72,12 +86,50 @@ Socket.on('typestat1',(e)=>{
         else{
             console.log(result[0].socketid)
             Socket.to(result[0].socketid).emit('reccivemessage',{msg:e.msg,senderid:e.senderid,
-                sendersocketid:e.sendersocketid});
+                sendersocketid:e.sendersocketid,time:e.time});
         }
     })
-    dbconnect.query(`insert into messeges (sender,msg,recever) values('${e.senderid}','${e.msg}','${e.recceiverid}')`)
+    
+    
+    
+
+
+
+    
 
   });
+
+  Socket.on('msgstatus',(e)=>{
+    dbconnect.query(`update messeges 
+    set msg_stat ='read'
+    where sender in('${e.sendid}','${e.reciverid}') and recever in('${e.sendid}','${e.reciverid}') and sender ='${e.reciverid}'`)
+  })
+
+  Socket.on('getlastmsg',(e)=>{
+    dbconnect.query(`select * from messeges where (sender ='${e.sender}' or recever ='${e.sender}') and msg_stat1 ='last'`,(err,msg)=>{
+       if(err){
+        console.log(err)
+       }
+       else{
+        Socket.emit('setlastmsg',msg)
+       }
+    })
+  })
+
+  //
+  Socket.on('getcount',(e)=>{
+    dbconnect.query(`select sender,count(*) as count from messeges where (sender ='${e.sender}' or recever='${e.sender}') and msg_stat is null group by sender `,(err,r)=>{
+      if(err){
+        console.log(err)
+      }
+      else{
+        console.log('countmsg',r)
+        Socket.emit('setcount',r)
+      }
+    })
+
+  })
+
 
   Socket.on("disconnect", () => {
     console.log(`disconnect ${Socket.id}`);
@@ -92,12 +144,10 @@ Socket.on('typestat1',(e)=>{
       second: "numeric",
       hour12: true,
     };
-    const formateddate = currentdate
-      .toLocaleString("en-IN", dateoption)
-      .replace(/,/g, "");
+    const formateddate = currentdate.toLocaleString("en-IN", dateoption).replace(/,/g, "");
     console.log(formateddate);
     dbconnect.query(
-      `update login_users set status='${formateddate}' where socketid ='${Socket.id}'`
+      `update login_users set status='Last seen at ${formateddate}' where socketid ='${Socket.id}'`
     );
     dbconnect.query(
       `select userid from login_users where socketid ='${Socket.id}'`,

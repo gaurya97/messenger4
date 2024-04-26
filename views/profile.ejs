@@ -31,7 +31,7 @@
           </div>
           <div class="bottom_header_content">
             <button id="chats" class="active">Chats</button>
-            <button id="status">Peoples</button>
+            <button id="status">Status</button>
             <button id="calls">Calls</button>
           </div>
         </div>
@@ -49,25 +49,26 @@
                       </div>
                       <div class="contact_section">
                         <h5 ><%= e.userid %></h5>
+                        <small id="ls_<%=e.userid %>"></small>
                       </div>
                       <div class="msg_counter">
-                        <small class="time">11:00 am</small>
-                        <small class="count">44</small>
+                        <small id="ts_<%=e.userid %>" class="time"></small>
+                        <small  id="tc_<%=e.userid %>" class="count"></small>
                       </div>
                     </li>
                    
                   <% }) %>
             </ul>
 
-            <button class="chatBtns">
+            <!-- <button class="chatBtns">
               <i class="fa fa-commenting" aria-hidden="true"></i>
-            </button>
+            </button> -->
           </div>
 
           <!-- status area is the start -->
           <div class=" contact_list status_area">
             <ul class="userContactList1">
-              <% loginussers.forEach((e)=>{%>
+              <!-- <% loginussers.forEach((e)=>{%>
                 <li>
                   
                   <div class="profile_section">
@@ -75,13 +76,14 @@
                   </div>
                   <div class="contact_section">
                     <h5><%= e.userid%></h5>
+                   
                   </div>
                   <div class="msg_counter">
                     <button>add friend</button>
                   </div>
                 </li>
                
-              <% }) %>
+              <% }) %> -->
         </ul>
           </div>
           <!-- status area is the end -->
@@ -107,7 +109,7 @@
                 </div>
 
                 <div class="call_link">
-                  <h5>Avinash Yadav</h5>
+                  <h5>Gaurav Jadhav</h5>
                   <small
                     ><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
                     10 March, 6:09 pm</small
@@ -125,7 +127,7 @@
                 </div>
 
                 <div class="call_link">
-                  <h5>Aman Sharma</h5>
+                  <h5>Sooraj Poojary</h5>
                   <small
                     ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> 10
                     March, 6:09 pm</small
@@ -134,57 +136,7 @@
 
                 <i class="fa fa-phone calling_icon" aria-hidden="true"></i>
               </li>
-              <li>
-                <div class="call_img">
-                  <img src="icons/img4.png" alt="" />
-                </div>
-
-                <div class="call_link">
-                  <h5>Arun Sharma</h5>
-                  <small
-                    ><i class="fa fa-long-arrow-left" aria-hidden="true"></i> 10
-                    March, 6:09 pm</small
-                  >
-                </div>
-
-                <i class="fa fa-phone calling_icon" aria-hidden="true"></i>
-              </li>
-              <li>
-                <div class="call_img">
-                  <img src="icons/img2.png" alt="" />
-                </div>
-
-                <div class="call_link">
-                  <h5>Ankit</h5>
-                  <small
-                    ><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    10 March, 6:09 pm</small
-                  >
-                </div>
-
-                <i
-                  class="fa fa-video-camera calling_icon"
-                  aria-hidden="true"
-                ></i>
-              </li>
-              <li>
-                <div class="call_img">
-                  <img src="icons/img7.png" alt="" />
-                </div>
-
-                <div class="call_link">
-                  <h5>Parmit</h5>
-                  <small
-                    ><i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                    10 March, 6:09 pm</small
-                  >
-                </div>
-
-                <i
-                  class="fa fa-video-camera calling_icon"
-                  aria-hidden="true"
-                ></i>
-              </li>
+              
             </ul>
 
             <button class="callBtns">
@@ -213,7 +165,7 @@
           <div class="header_contact">
             <div class="profile_contact">
               <i class="fa fa-arrow-left"></i>
-              <img src="/icons/img8.png" alt="">
+              <img src="/icons/img2.png" alt="">
             </div>
             <div class="contact_name">
               <h5></h5>

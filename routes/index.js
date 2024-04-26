@@ -61,9 +61,9 @@ const isuserverified =(req,res,next)=>{
 
 console.log('hii i from middleware')
 
-router.get('/register', function(req, res, next) {
-  res.render('register');
-});
+// router.get('/register', function(req, res, next) {
+//   res.render('register');
+// });
 router.post('/register',(req,res)=>{
    try {
     dbconnect.query(
@@ -148,12 +148,21 @@ router.get('/profile',isuserverified,(req,res)=>{
         console.log(err)
       }
       else if(results.length>0){
-        console.log(results[0].userid)
-        console.log(req.user.userid)
-        res.render('profile',{
-          users:results,
-          userid:req.user.userid
-        })
+        let newuser =results.filter((e)=>{
+  return e.userid != req.user.userid
+})
+
+console.log(results[0].userid)
+console.log(req.user.userid)
+res.render('profile',{
+  users:newuser,
+  userid:req.user.userid,
+
+})
+
+
+
+       
       }
     })
    
@@ -172,7 +181,7 @@ router.get('/profile',isuserverified,(req,res)=>{
 
 router.post('/loadmesseges',(req,res,next)=>{
       console.log(req.body);
-      dbconnect.query(`select sender,msg from messeges where sender in('${req.body.sendid}','${req.body.reciverid}') and recever in('${req.body.sendid}','${req.body.reciverid}') order by id`,(err,result)=>{
+      dbconnect.query(`select sender,msg,time from messeges where sender in('${req.body.sendid}','${req.body.reciverid}') and recever in('${req.body.sendid}','${req.body.reciverid}') order by id`,(err,result)=>{
         if(err){
           console.log(err)
         }
