@@ -143,8 +143,9 @@ Socket.on('typestat1',(e)=>{
       minute: "numeric",
       second: "numeric",
       hour12: true,
+      timeZone: "Asia/Kolkata"
     };
-    const formateddate = currentdate.toLocaleString("en-IN", dateoption).replace(/,/g, "");
+    const formateddate = currentdate.toLocaleString("en-IN" ,dateoption).replace(/,/g, "");
     console.log(formateddate);
     dbconnect.query(
       `update login_users set status='Last seen at ${formateddate}' where socketid ='${Socket.id}'`
