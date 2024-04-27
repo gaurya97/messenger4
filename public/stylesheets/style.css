@@ -22,7 +22,7 @@ body {
 }
 ._header {
   width: 100%;
-  background-color: #25d366;
+ 
   color: #fff;
   padding: 13px;
   position: relative;
@@ -436,8 +436,7 @@ img {
 .header_contact {
   display: flex;
   color: #fff;
-  height: 10%;
-  background-color: #25d366;
+  background-color: #128c7e;
   padding: 18px;
   gap: 10px;
   position: relative;
