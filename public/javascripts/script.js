@@ -357,6 +357,8 @@ document.getElementById('msg-input').addEventListener('blur',(e)=>{
 
 socket.on('typpingstat',(e)=>{
   document.getElementById(`${e}`).value='typing...';
+  document.getElementById(`ls_${e}`).innerText='typing...'
+
   console.log()
   if(contact_name.innerHTML===e){
     stat.innerHTML='typing...';
@@ -364,6 +366,7 @@ socket.on('typpingstat',(e)=>{
 })
 socket.on('typpingstat1',(e)=>{
   document.getElementById(`${e}`).value='online';
+  loadLastmsg();
   if(contact_name.innerHTML===e){
     stat.innerHTML='online';
   }
