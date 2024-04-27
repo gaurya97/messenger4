@@ -74,7 +74,7 @@ router.post('/register',(req,res)=>{
             console.log(err)
            }
            else{
-            req.flash('err','Register Succesfully Please Login To Continued')
+            req.flash('err','Registered Succesfully Please Login To Continued')
             res.redirect('/login');
            }
       }
