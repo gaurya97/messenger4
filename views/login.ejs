@@ -13,9 +13,14 @@
      <div class="login-box" id="login" >
     <div><b style="color: #25d366; font-size: 25px;">Messenger</b></div>
 
-    <input type="text" name="userid" placeholder="Enter Username">
-    <input type="text" name="password"  placeholder="Enter Password">
-    <p></p>
+    <input type="text" name="userid" required  placeholder="Enter Username">
+    <input type="text" name="password" required  placeholder="Enter Password">
+    <% let m =msg %>
+    <% if(m =='Invalid Password'||m =='Invalid Username'){ %>
+        <small style="color: red;"><%=msg%></small>
+    <%}else{%>
+        <small style="color:#25d366; "><%=msg%></small>
+    <%}    %>
     <button type="submit"><b>Log in</b></button>
 </form>
     <p></p>
@@ -28,10 +33,10 @@
     <div class="login-box reg" id="register">
        <div><b style="color: #25d366; font-size: 25px;">Messenger</b></div>
 
-   <input type="text" name="username"  placeholder="Enter Username">
-   <input type="text" name="userid"  placeholder="Enter User Id">
-   <input type="text" name="mobile"  placeholder="Enter Mobile">
-   <input type="text" name="password"  placeholder="Enter Password">
+   <input type="text" name="username" required  placeholder="Enter Username">
+   <input type="text" name="userid" required  placeholder="Enter User Id">
+   <input type="tel" pattern="[0-9]{10}"  name="mobile" required  placeholder="Enter 10-digit phone number">
+   <input type="text" name="password" required  placeholder="Enter Password">
    <p></p>
    <button type="submit"><b>Create Account</b></button>
 </form>

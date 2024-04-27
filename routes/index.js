@@ -3,6 +3,7 @@ var router = express.Router();
 const EventEmitter =require('events');
 const event = new EventEmitter();
 const { Server, Socket } = require('socket.io');
+const flash =require('connect-flash');
 // require('dotenv').config();
 // const twilio =require('twilio')
 const dbconnect =require('./dbconfig');
@@ -73,7 +74,8 @@ router.post('/register',(req,res)=>{
             console.log(err)
            }
            else{
-            res.send('registered');
+            req.flash('err','Register Succesfully Please Login To Continued')
+            res.redirect('/login');
            }
       }
     )
@@ -86,7 +88,7 @@ router.post('/register',(req,res)=>{
 // })
 router.get('/login',(req,res)=>{
   
-      res.render('login')
+      res.render('login',msg = req.flash('err'))
       
 })
 router.post('/login',(req,res)=>{
@@ -95,7 +97,8 @@ router.post('/login',(req,res)=>{
       console.log(err)
     }
     else if(result.length==0){
-        res.send('invalid username')
+      req.flash('err','Invalid Username')
+        res.redirect('/login');
     }
     else{
       console.log(result);
@@ -117,7 +120,8 @@ router.post('/login',(req,res)=>{
 
       }
       else{
-        res.send('invalid password')
+        req.flash('err','Invalid Password')
+       res.redirect('/login')
       }
     }
 

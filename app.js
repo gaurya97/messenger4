@@ -9,10 +9,19 @@ var http = require("http");
 var indexrouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const { Socket } = require("dgram");
+const flash =require('connect-flash');
+const session =require('express-session');
 let websocketid;
 var app = express();
 let server = http.createServer(app);
 let io = new Server(server);
+
+app.use(session({
+  secret:'myname',
+  resave:true,
+  saveUninitialized:true
+}))
+app.use(flash())
 
 io.on("connection", (Socket) => {
   console.log("new user connected");
