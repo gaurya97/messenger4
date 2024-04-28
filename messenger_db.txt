@@ -1,0 +1,42 @@
+create table jwt_auth(
+id int unique primary key auto_increment,
+username varchar(50),
+userid varchar(25),
+password varchar(25),
+phoneno varchar(12),
+otp varchar(10)
+);
+
+create table login_users(
+id int primary key auto_increment,
+username varchar(50),
+userid varchar(50),
+socketid varchar(60),
+status varchar(80)
+
+);
+
+
+
+
+
+
+create table messeges(
+id int unique primary key auto_increment,
+sender varchar(50),
+msg varchar(100),
+recever varchar(50),
+msg_stat varchar(10),
+msg_stat1 varchar(10),
+time varchar(10)
+);
+
+use test;
+drop table  login_users;
+select * from jwt_auth;
+truncate table login_users;
+select * from login_users;
+truncate table messeges;
+select sender,count(*) from messeges where sender ='gauravj' and msg_stat is null group by sender;
+select sender,recever,count(*) from messeges where (sender ='jaya' or recever ='jaya') and msg_stat is null group by sender,recever ;
+drop table messeges;
