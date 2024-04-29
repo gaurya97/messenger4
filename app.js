@@ -18,8 +18,8 @@ let io = new Server(server);
 
 app.use(session({
   secret:'myname',
-  resave:true,
-  saveUninitialized:true
+  resave:false,
+  saveUninitialized:false
 }))
 app.use(flash())
 
