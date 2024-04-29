@@ -275,7 +275,7 @@ let reciveMessege=(messege,time)=>{
 }
 
 //load last msg and count
-let loadLastmsg =()=>{
+let loadLastmsg =(color)=>{
   Array.from(document.getElementsByClassName('count')).forEach((e)=>{
     console.log('wedgahdshag',e.id)
     document.getElementById(`${e.id}`).style.display ='none'
