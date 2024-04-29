@@ -232,12 +232,17 @@ userContactList.forEach((element, index) =>{
     
   })
 });
+
+const typing_color=(receverid,color)=>{
+  document.getElementById(`ls_${receverid}`).style.color=`${color}`;
+}
+
 profile_contact.addEventListener('click', () =>{
   socket.emit('msgstatus',{
     sendid:userid,
     reciverid:reciverid
   })
-  loadLastmsg();
+  loadLastmsg('gray');
 
   contact_chat_area.style.display ="none";
   document.getElementById('cl').style.display='block';
@@ -290,6 +295,7 @@ let loadLastmsg =()=>{
         lastid=e.sender
       }
       console.log(lastid)
+      document.getElementById(`ls_${lastid}`).style.color=`${color}`
       document.getElementById(`ls_${lastid}`).innerText=e.msg
       document.getElementById(`ts_${lastid}`).innerText=e.time
     })
@@ -345,7 +351,7 @@ document.getElementById('msg-input').value='';
 socket.on('reccivemessage',(e)=>{
  
 reciveMessege(e.msg,e.time)
-loadLastmsg();
+loadLastmsg('gray');
 })
 
 document.getElementById('msg-input').addEventListener('input',(e)=>{
@@ -357,6 +363,7 @@ document.getElementById('msg-input').addEventListener('blur',(e)=>{
 
 socket.on('typpingstat',(e)=>{
   document.getElementById(`${e}`).value='typing...';
+  typing_color(e,'green')
   document.getElementById(`ls_${e}`).innerText='typing...'
 
   console.log()
@@ -366,7 +373,7 @@ socket.on('typpingstat',(e)=>{
 })
 socket.on('typpingstat1',(e)=>{
   document.getElementById(`${e}`).value='online';
-  loadLastmsg();
+  loadLastmsg('gray');
   if(contact_name.innerHTML===e){
     stat.innerHTML='online';
   }
