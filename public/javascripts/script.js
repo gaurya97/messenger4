@@ -382,7 +382,7 @@ socket.on('typpingstat1',(e)=>{
 
 
 document.addEventListener('DOMContentLoaded',(e)=>{
-   loadLastmsg()
+   loadLastmsg('gray')
 })
 
 
